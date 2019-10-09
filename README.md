@@ -1,5 +1,6 @@
-#ATM Project. Software engineering course.
-###Вибір методологіїї розробки ПЗ
+# ATM Project. Software engineering course.
+
+### Вибір методологіїї розробки ПЗ
 ----
 1. **Основні положення RAD**
 	* Інструментарій має бути націлений на мінімізацію часу розробки.
