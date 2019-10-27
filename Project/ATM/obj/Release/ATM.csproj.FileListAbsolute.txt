@@ -1,0 +1,16 @@
+D:\Microsoft Visual Studio\repos\ATM\ATM\bin\Release\ATM.exe.config
+D:\Microsoft Visual Studio\repos\ATM\ATM\bin\Release\ATM.exe
+D:\Microsoft Visual Studio\repos\ATM\ATM\bin\Release\ATM.pdb
+D:\Microsoft Visual Studio\repos\ATM\ATM\bin\Release\MySql.Data.dll
+D:\Microsoft Visual Studio\repos\ATM\ATM\bin\Release\Google.Protobuf.dll
+D:\Microsoft Visual Studio\repos\ATM\ATM\bin\Release\BouncyCastle.Crypto.dll
+D:\Microsoft Visual Studio\repos\ATM\ATM\bin\Release\Renci.SshNet.dll
+D:\Microsoft Visual Studio\repos\ATM\ATM\bin\Release\MySql.Data.xml
+D:\Microsoft Visual Studio\repos\ATM\ATM\obj\Release\ATM.csprojAssemblyReference.cache
+D:\Microsoft Visual Studio\repos\ATM\ATM\obj\Release\ATM.Form1.resources
+D:\Microsoft Visual Studio\repos\ATM\ATM\obj\Release\ATM.Properties.Resources.resources
+D:\Microsoft Visual Studio\repos\ATM\ATM\obj\Release\ATM.csproj.GenerateResource.cache
+D:\Microsoft Visual Studio\repos\ATM\ATM\obj\Release\ATM.csproj.CoreCompileInputs.cache
+D:\Microsoft Visual Studio\repos\ATM\ATM\obj\Release\ATM.csproj.CopyComplete
+D:\Microsoft Visual Studio\repos\ATM\ATM\obj\Release\ATM.exe
+D:\Microsoft Visual Studio\repos\ATM\ATM\obj\Release\ATM.pdb
