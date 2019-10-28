@@ -59,11 +59,14 @@ namespace ATM
         int pin_tries = 0;
         public Form1()
         {
+           
             System.Globalization.CultureInfo customCulture = (System.Globalization.CultureInfo)System.Threading.Thread.CurrentThread.CurrentCulture.Clone();
             customCulture.NumberFormat.NumberDecimalSeparator = ".";
             System.Threading.Thread.CurrentThread.CurrentCulture = customCulture;
             InitializeComponent();
             openCardDialog1.InitialDirectory = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
+            TabFrames1.Appearance = TabAppearance.FlatButtons; TabFrames1.ItemSize = new Size(0, 1);
+            TabFrames1.SizeMode = TabSizeMode.Fixed;
         }
 
         private void ButtonInsertCard_Click(object sender, EventArgs e)
@@ -370,6 +373,7 @@ namespace ATM
 
         private void MaskedPinTextBox_Enter(object sender, EventArgs e)
         {
+            MaskedPinTextBox.SelectionStart = 0;
             this.BeginInvoke((MethodInvoker)delegate ()
             {
                 MaskedPinTextBox.Select(0, 0);
@@ -523,6 +527,12 @@ namespace ATM
                     TabFrames1.SelectedTab = tabMainMenu;
                 }
             }
+        }
+
+        private void MaskedPinTextBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            MaskedPinTextBox.Text = "";
+            MaskedPinTextBox.SelectionStart = 0;
         }
     }
 }
