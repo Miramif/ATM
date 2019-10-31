@@ -16,6 +16,7 @@
             if (disposing && (components != null))
             {
                 components.Dispose();
+                Ac1.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -154,6 +155,7 @@
             // 
             this.textTAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textTAmount.Location = new System.Drawing.Point(144, 142);
+            this.textTAmount.MaxLength = 10;
             this.textTAmount.Name = "textTAmount";
             this.textTAmount.Size = new System.Drawing.Size(245, 26);
             this.textTAmount.TabIndex = 12;
@@ -438,7 +440,7 @@
             this.tabMainMenu.Controls.Add(this.panelMenu);
             this.tabMainMenu.Location = new System.Drawing.Point(4, 25);
             this.tabMainMenu.Name = "tabMainMenu";
-            this.tabMainMenu.Size = new System.Drawing.Size(569, 456);
+            this.tabMainMenu.Size = new System.Drawing.Size(569, 428);
             this.tabMainMenu.TabIndex = 3;
             this.tabMainMenu.Text = "tabMM";
             this.tabMainMenu.UseVisualStyleBackColor = true;
@@ -718,7 +720,7 @@
             this.tabSettings.Controls.Add(this.panelSettings);
             this.tabSettings.Location = new System.Drawing.Point(4, 25);
             this.tabSettings.Name = "tabSettings";
-            this.tabSettings.Size = new System.Drawing.Size(569, 456);
+            this.tabSettings.Size = new System.Drawing.Size(569, 428);
             this.tabSettings.TabIndex = 8;
             this.tabSettings.Text = "Settings";
             this.tabSettings.UseVisualStyleBackColor = true;
@@ -773,7 +775,7 @@
             this.tabChangePin.Controls.Add(this.panel1);
             this.tabChangePin.Location = new System.Drawing.Point(4, 25);
             this.tabChangePin.Name = "tabChangePin";
-            this.tabChangePin.Size = new System.Drawing.Size(569, 456);
+            this.tabChangePin.Size = new System.Drawing.Size(569, 428);
             this.tabChangePin.TabIndex = 9;
             this.tabChangePin.Text = "ChangePin";
             // 

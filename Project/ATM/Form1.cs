@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ATM
@@ -17,13 +12,13 @@ namespace ATM
             public static string t_pin = "Введіть PIN";
             public static string t_settings = "Налаштування";
             public static string t_withdraw = "Зняти гроші";
-            public static string t_transfer = "Перевід на інший рахунок";
+            public static string t_transfer = "Переказ на інший рахунок";
             public static string t_balance = "Баланас рахунку";
             public static string t_exit = "Завершення роботи";
             public static string t_tomenu = "Назад до меню";
             public static string t_next = "Далі";
             public static string t_withdraw_text = "Введіть сумму для зняття кратну 50";
-            public static string t_transfer1 = "Введіть номер картки та сумму переводу. Перевід доступен тільки в межах нашого банку";
+            public static string t_transfer1 = "Введіть номер картки та сумму переказу. Переказ доступен тільки в межах нашого банку";
             public static string t_t_card = "Номер картки:";
             public static string t_t_amount = "Сума переводу:";
             public static string t_pinb = "Ввід";
@@ -32,6 +27,7 @@ namespace ATM
             public static string t_t_change_pin_old = "Старий PIN:";
             public static string t_t_change_pin_new = "Новий PIN:";
         }
+
         public struct LangEng
         {
             public static string t_pin = "Input PIN";
@@ -52,14 +48,15 @@ namespace ATM
             public static string t_t_change_pin_old = "Old PIN:";
             public static string t_t_change_pin_new = "New PIN:";
         }
-        Account Ac1 = new Account();
+
+        readonly Account Ac1 = new Account();
         int lang;
         string card_number;
         string sum_to_withdraw;
         int pin_tries = 0;
+
         public Form1()
         {
-           
             System.Globalization.CultureInfo customCulture = (System.Globalization.CultureInfo)System.Threading.Thread.CurrentThread.CurrentCulture.Clone();
             customCulture.NumberFormat.NumberDecimalSeparator = ".";
             System.Threading.Thread.CurrentThread.CurrentCulture = customCulture;
@@ -83,10 +80,10 @@ namespace ATM
                         "Card is expired, contact your nearest bank branch", "Помилка|Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     if (status == "ACT")
                     {
-                        string bank_type = card_number.Substring(0,4);
+                        string bank_type = card_number.Substring(0, 4);
                         if (bank_type == "1414") buttonSettings.Enabled = true;
                         else buttonSettings.Enabled = false;
-                      TabFrames1.SelectedTab = tabLanguage;
+                        TabFrames1.SelectedTab = tabLanguage;
                     }
                 }
             }
@@ -111,7 +108,6 @@ namespace ATM
             buttonToMenuW2.Text = LangUkr.t_tomenu;
             labelWithdraw1.Text = LangUkr.t_withdraw_text;
             ButtonEnterPin.Text = LangUkr.t_pinb;
-
             buttonToMenuT1.Text = LangUkr.t_tomenu;
             buttonExitT1.Text = LangUkr.t_exit;
             labelTransfer1.Text = LangUkr.t_transfer1;
@@ -119,7 +115,6 @@ namespace ATM
             labelTAmount.Text = LangUkr.t_t_amount;
             buttonNextT1.Text = LangUkr.t_next;
             TabFrames1.SelectedTab = tabPin;
-
             buttonToMenuS.Text = LangUkr.t_tomenu;
             buttonToMenuSC.Text = LangUkr.t_tomenu;
             buttonExitS.Text = LangUkr.t_exit;
@@ -150,14 +145,12 @@ namespace ATM
             buttonToMenuW2.Text = LangEng.t_tomenu;
             labelWithdraw1.Text = LangEng.t_withdraw_text;
             ButtonEnterPin.Text = LangEng.t_pinb;
-
             buttonToMenuT1.Text = LangEng.t_tomenu;
             buttonExitT1.Text = LangEng.t_exit;
             labelTransfer1.Text = LangEng.t_transfer1;
             labelTCard.Text = LangEng.t_t_card;
             labelTAmount.Text = LangEng.t_t_amount;
             buttonNextT1.Text = LangEng.t_next;
-
             buttonToMenuS.Text = LangEng.t_tomenu;
             buttonToMenuSC.Text = LangEng.t_tomenu;
             buttonExitS.Text = LangEng.t_exit;
@@ -167,18 +160,15 @@ namespace ATM
             LabelNewPin.Text = LangEng.t_t_change_pin_new;
             labelOldPin.Text = LangEng.t_t_change_pin_old;
             labelChangePin.Text = LangEng.t_change_pin;
-
             TabFrames1.SelectedTab = tabPin;
         }
 
         private void MaskedPinTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
             }
-
         }
 
         private void ButtonEnterPin_Click(object sender, EventArgs e)
@@ -186,50 +176,67 @@ namespace ATM
             if (!MaskedPinTextBox.MaskCompleted)
             {
                 if (lang == 1)
-                    MessageBox.Show("Введіть PIN ще раз.", "Некоректні дані", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                if (lang == 2)
-                    MessageBox.Show("Enter the PIN again.", "Incorrect data", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else
-            {
-            if (Ac1.CheckPinVerification(card_number, MaskedPinTextBox.Text))
-            {
-                pin_tries = 0;
-                TabFrames1.SelectedTab = tabMainMenu;
-            }
-            else
-            {
-                if (pin_tries <= 1)
                 {
-                    if (lang == 1)
-                        MessageBox.Show("Введіть PIN ще раз.", "Неправильний PIN", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    if (lang == 2)
-                        MessageBox.Show("Enter the PIN again.", "Wrong PIN", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    pin_tries++;
+                    MessageBox.Show("Введіть PIN ще раз.", "Некоректні дані", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                if (lang == 2)
+                {
+                    MessageBox.Show("Enter the PIN again.", "Incorrect data", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            else
+            {
+                if (Ac1.CheckPinVerification(card_number, MaskedPinTextBox.Text))
+                {
+                    pin_tries = 0;
+                    TabFrames1.SelectedTab = tabMainMenu;
                 }
                 else
                 {
-                    if (lang == 1)
-                        MessageBox.Show("Ви тричі ввели неправильний PIN. Задля безпеки картка була заблокована. Зверніться у найближче віділленя банкомату.", "Картка заблокована", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    if (lang == 2)
-                        MessageBox.Show("You have entered the wrong PIN three times. For security reasons, the card was blocked. Contact your nearest ATM branch.", "Card is blocked", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    pin_tries = 0;
-                    Ac1.BlockCard(card_number);
-                    TabFrames1.SelectedTab = tabWelcome;
-
+                    if (pin_tries <= 1)
+                    {
+                        if (lang == 1)
+                        {
+                            MessageBox.Show("Введіть PIN ще раз.", "Неправильний PIN", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        if (lang == 2)
+                        {
+                            MessageBox.Show("Enter the PIN again.", "Wrong PIN", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        pin_tries++;
+                    }
+                    else
+                    {
+                        if (lang == 1)
+                        {
+                            MessageBox.Show("Ви тричі ввели неправильний PIN. Задля безпеки картка була заблокована." +
+                                " Зверніться у найближче віділленя банкомату.", "Картка заблокована", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                            if (lang == 2)
+                        {
+                            MessageBox.Show("You have entered the wrong PIN three times. For security reasons, " +
+                                "the card was blocked. Contact your nearest ATM branch.", "Card is blocked", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        pin_tries = 0;
+                        Ac1.BlockCard(card_number);
+                        TabFrames1.SelectedTab = tabWelcome;
+                    }
                 }
             }
-
-            }
             MaskedPinTextBox.Text = "";
-
         }
 
         private void ButtonBalance_Click(object sender, EventArgs e)
         {
             List<string>[] Data1 = Ac1.GetInfo(card_number);
-            if (lang == 1) labelBalance.Text = "Баланс рахунку:\n" + string.Join(",", Data1[7].ToArray()) + " ГРН";
-            if (lang == 2) labelBalance.Text = "Account balance:\n" + string.Join(",", Data1[7].ToArray()) + " UAH";
+            if (lang == 1)
+            {
+                labelBalance.Text = "Баланс рахунку:\n" + string.Join(",", Data1[7].ToArray()) + " ГРН";
+            }
+            if (lang == 2)
+            {
+                labelBalance.Text = "Account balance:\n" + string.Join(",", Data1[7].ToArray()) + " UAH";
+            }
             TabFrames1.SelectedTab = tabBalance;
         }
 
@@ -253,9 +260,13 @@ namespace ATM
             if (textWithdraw.Text == "")
             {
                 if (lang == 1)
+                {
                     MessageBox.Show("Введіть суму ще раз.", "Невірна сума", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
                 if (lang == 2)
+                {
                     MessageBox.Show("Enter the amount again.", "Incorrect amount", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             else
             {
@@ -263,9 +274,15 @@ namespace ATM
                 if (sum1 % 50 != 0)
                 {
                     if (lang == 1)
-                        MessageBox.Show("Сума не кратна 50. Введіть суму ще раз.", "Невірна сума", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    {
+                        MessageBox.Show("Сума не кратна 50. Введіть суму ще раз.",
+                            "Невірна сума", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                     if (lang == 2)
-                        MessageBox.Show("The amount is not multiple of 50. Please enter the amount again.", "Incorrect amount", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    {
+                        MessageBox.Show("The amount is not multiple of 50. Please enter the amount again.",
+                            "Incorrect amount", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
                 else
                 {
@@ -275,22 +292,30 @@ namespace ATM
                         sum1 += sum1 * 0.01;
                         sum_to_withdraw = string.Format("{0:0.00}", sum1);
                         if (lang == 1)
+                        {
                             labelWithdraw2.Text = "Комісія на зняття з картки нашого банка складає 1%, отже із рахунку " +
                                     "спишеться: " + sum_to_withdraw + " ГРН\n Для продовження натисніть кнопку 'Далі'";
+                        }
                         else if (lang == 2)
+                        {
                             labelWithdraw2.Text = "The fee for withdrawal from the card of our bank is 1%, so from account will be written of: " +
                                        sum_to_withdraw + " UAH\n Press 'Next' button to proceed";
+                        }
                     }
                     else
                     {
                         sum1 += sum1 * 0.05;
                         sum_to_withdraw = sum1.ToString();
                         if (lang == 1)
+                        {
                             labelWithdraw2.Text = "Комісія на зняття з картки іншого банка складає 5%, отже із рахунку " +
                                     "спишеться: " + sum_to_withdraw + " ГРН\n Для продовження натисніть кнопку 'Далі'";
+                        }
                         else if (lang == 2)
+                        {
                             labelWithdraw2.Text = "The fee for withdrawal from the card of another bank is 5%, so from account will be written of: " +
                                        sum_to_withdraw + " UAH\n Press 'Next' button to proceed";
+                        }
                     }
                     textWithdraw.Text = "";
                     TabFrames1.SelectedTab = tabWithdraw2;
@@ -337,17 +362,31 @@ namespace ATM
             double old_balance = Convert.ToDouble(string.Join(",", Data1[7].ToArray()));
             if (old_balance < Convert.ToDouble(sum_to_withdraw))
             {
-                if (lang == 1) MessageBox.Show("На рахунку недостатньо коштів. Введіть іншу суму", "Недостатьно коштів на рахунку", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                else if (lang == 2) MessageBox.Show("There is not enough money in the account. Enter a different amount", "Not enought money", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (lang == 1)
+                {
+                    MessageBox.Show("На рахунку недостатньо коштів. Введіть іншу суму", 
+                        "Недостатьно коштів на рахунку", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else if (lang == 2)
+                {
+                    MessageBox.Show("There is not enough money in the account. " +
+                        "Enter a different amount", "Not enought money", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
                 TabFrames1.SelectedTab = tabWithdraw1;
             }
             else
             {
                 double new_balance = old_balance - Convert.ToDouble(sum_to_withdraw);
-               // MessageBox.Show(string.Format("{0:0.00}", new_balance + "///" + string.Join(", ", Data1[7].ToArray())));
+                // MessageBox.Show(string.Format("{0:0.00}", new_balance + "///" + string.Join(", ", Data1[7].ToArray())));
                 Ac1.Withdraw(card_number, string.Format("{0:0.00}", new_balance), string.Join(",", Data1[7].ToArray()));
-                if (lang == 1) MessageBox.Show("Операція пройшла успішна, заберіть ваші гроші", "Результат", MessageBoxButtons.OK);
-                if (lang == 2) MessageBox.Show("The operation was successful, take your money", "Result", MessageBoxButtons.OK);
+                if (lang == 1)
+                {
+                    MessageBox.Show("Операція пройшла успішна, заберіть ваші гроші", "Результат", MessageBoxButtons.OK);
+                }
+                if (lang == 2)
+                {
+                    MessageBox.Show("The operation was successful, take your money", "Result", MessageBoxButtons.OK);
+                }
                 TabFrames1.SelectedTab = tabMainMenu;
             }
         }
@@ -359,7 +398,6 @@ namespace ATM
             {
                 e.Handled = true;
             }
-
             if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
             {
                 e.Handled = true;
@@ -392,12 +430,16 @@ namespace ATM
 
         private void ButtonNextT1_Click(object sender, EventArgs e)
         {
-           if (textTAmount.Text == "" || !maskedTCardNumber.MaskCompleted)
+            if (textTAmount.Text == "" || !maskedTCardNumber.MaskCompleted)
             {
                 if (lang == 1)
+                {
                     MessageBox.Show("Введіть дані ще раз.", "Невірні дані", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
                 if (lang == 2)
+                {
                     MessageBox.Show("Enter the data again.", "Incorrect data", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             else
             {
@@ -408,9 +450,13 @@ namespace ATM
                 if (string.Join(",", Data2[0].ToArray()) == "")
                 {
                     if (lang == 1)
+                    {
                         MessageBox.Show("Користувача з таким рахунком не знайдено", "Невірні дані", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                     if (lang == 2)
+                    {
                         MessageBox.Show("No user with this account was found.", "Incorrect data", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
                 else
                 {
@@ -421,8 +467,16 @@ namespace ATM
 
                     if (From_old_balance < Convert.ToDouble(textTAmount.Text))
                     {
-                        if (lang == 1) MessageBox.Show("На рахунку недостатньо коштів. Введіть іншу суму", "Недостатьно коштів на рахунку", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        else if (lang == 2) MessageBox.Show("There is not enough money in the account. Enter a different amount", "Not enought money", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        if (lang == 1)
+                        {
+                            MessageBox.Show("На рахунку недостатньо коштів. Введіть іншу суму",
+                            "Недостатьно коштів на рахунку", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                        else if (lang == 2)
+                        {
+                            MessageBox.Show("There is not enough money in the account. " +
+                            "Enter a different amount", "Not enought money", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
                         textTAmount.Text = "";
                     }
                     else
@@ -431,17 +485,21 @@ namespace ATM
                         To_new_balance = To_old_balance + Convert.ToDouble(textTAmount.Text);
                         Ac1.Withdraw(card_number, string.Format("{0:0.00}", From_new_balance), string.Format("{0:0.00}", From_old_balance));
                         Ac2.Withdraw(maskedTCardNumber.Text, string.Format("{0:0.00}", To_new_balance), string.Format("{0:0.00}", To_old_balance));
-                        if (lang == 1) MessageBox.Show("Операція пройшла успішна", "Результат", MessageBoxButtons.OK);
-                        if (lang == 2) MessageBox.Show("The operation was successful", "Result", MessageBoxButtons.OK);
+                        if (lang == 1)
+                        {
+                            MessageBox.Show("Операція пройшла успішна", "Результат", MessageBoxButtons.OK);
+                        }
+                        if (lang == 2)
+                        {
+                            MessageBox.Show("The operation was successful", "Result", MessageBoxButtons.OK);
+                        }
                         textTAmount.Text = "";
                         maskedTCardNumber.Text = "";
                         TabFrames1.SelectedTab = tabMainMenu;
                     }
 
                 }
-
-
-
+                Ac2.Dispose();
             }
         }
 
@@ -488,9 +546,13 @@ namespace ATM
             if (!maskedOldPin.MaskCompleted || !maskedNewPin.MaskCompleted)
             {
                 if (lang == 1)
+                {
                     MessageBox.Show("Введіть дані ще раз.", "Невірні дані", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
                 if (lang == 2)
+                {
                     MessageBox.Show("Enter the data again.", "Incorrect data", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             else
             {
@@ -499,17 +561,27 @@ namespace ATM
                     if (pin_tries <= 2)
                     {
                         if (lang == 1)
+                        {
                             MessageBox.Show("Введіть старий PIN ще раз.", "Неправильний старий PIN", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                         if (lang == 2)
+                        {
                             MessageBox.Show("Enter the old PIN again.", "Wrong old PIN", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                         pin_tries++;
                     }
                     else
                     {
                         if (lang == 1)
-                            MessageBox.Show("Ви тричі ввели неправильний PIN. Задля безпеки картка була заблокована. Зверніться у найближче віділленя банкомату.", "Картка заблокована", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        {
+                            MessageBox.Show("Ви тричі ввели неправильний PIN. Задля безпеки картка була заблокована. " +
+                                "Зверніться у найближче віділленя банкомату.", "Картка заблокована", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                         if (lang == 2)
-                            MessageBox.Show("You have entered the wrong PIN three times. For security reasons, the card was blocked. Contact your nearest ATM branch.", "Card is blocked", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        {
+                            MessageBox.Show("You have entered the wrong PIN three times. For security reasons, the card was blocked." +
+                                " Contact your nearest ATM branch.", "Card is blocked", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                         pin_tries = 0;
                         Ac1.BlockCard(card_number);
                         TabFrames1.SelectedTab = tabWelcome;
@@ -520,8 +592,14 @@ namespace ATM
                 else
                 {
                     Ac1.ChangePin(card_number, maskedNewPin.Text, maskedOldPin.Text);
-                    if (lang == 1) MessageBox.Show("Операція пройшла успішна", "Результат", MessageBoxButtons.OK);
-                    if (lang == 2) MessageBox.Show("The operation was successful", "Result", MessageBoxButtons.OK);
+                    if (lang == 1)
+                    {
+                        MessageBox.Show("Операція пройшла успішна", "Результат", MessageBoxButtons.OK);
+                    }
+                    if (lang == 2)
+                    {
+                        MessageBox.Show("The operation was successful", "Result", MessageBoxButtons.OK);
+                    }
                     maskedNewPin.Text = "";
                     maskedOldPin.Text = "";
                     TabFrames1.SelectedTab = tabMainMenu;
